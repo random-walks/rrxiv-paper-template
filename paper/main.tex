@@ -1,0 +1,75 @@
+% main.tex — your rrxiv paper.
+%
+% This template ships a one-claim "hello world" paper that compiles
+% out-of-the-box. Edit the metadata at the top, then replace the body
+% with your actual content. Keep using the `claim`, `evidence`,
+% `observation`, `openquestion`, and `scope` environments — the rrxiv
+% parser extracts these into the Canonical Intermediate Representation.
+%
+% Build:
+%   ./scripts/build.sh
+% or:
+%   tectonic -X compile paper/main.tex --outdir build
+
+\documentclass{rrxiv}
+
+% --- rrxiv metadata (mirrored in rrxiv-meta.json) ---
+\rrxivid{rrxiv-paper-template}        % leave as template id until first submission
+\rrxivversion{v1}
+\rrxivprotocolversion{0.1.0}
+\rrxivlicense{CC-BY-4.0}
+\rrxivtopics{example,template}
+
+\title{A starter rrxiv paper}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This template is a working rrxiv submission. It contains one claim, one
+piece of supporting evidence, one open question, and a citation, so it
+exercises every layer of the protocol and validates against the schema
+without further edits. Replace this abstract, the body, and the
+\texttt{rrxiv-meta.json} metadata to start your own paper.
+\end{abstract}
+
+\section{Background}
+\label{sec:background}
+
+Replace this section with your motivation. Cite prior work via
+\verb|\cite{key}| referring to entries in \texttt{paper/refs.bib}.
+
+\section{Claims}
+\label{sec:claims}
+
+\begin{claim}[Template renders cleanly]
+\label{claim:hello}
+A fresh clone of \texttt{rrxiv-paper-template} compiles to a valid
+rrxiv paper without modification: the PDF builds, the sidecar
+\texttt{*.rrxiv.aux} emits, and the resulting CIR validates against
+\texttt{cir.schema.json} v0.1.0~\cite{rrxiv-cir-schema}.
+\end{claim}
+
+\begin{evidence}[CI run on every push]
+\label{ev:ci}
+The workflow in \texttt{.github/workflows/build.yml} runs
+\texttt{scripts/build.sh}, \texttt{scripts/extract-cir.sh}, and
+\texttt{scripts/verify.sh} on every push and pull request. The badge in
+\texttt{README.md} reflects the latest CI outcome.
+\end{evidence}
+
+\begin{openquestion}[How should template versions be tracked?]
+\label{oq:versioning}
+This template is intentionally simple; future revisions may add
+recommended figure conventions, a \texttt{paper/appendix.tex} include
+pattern, or a script for vendored-class refresh. The right cadence and
+governance for those updates is an open process question for the rrxiv
+project.
+\end{openquestion}
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}
