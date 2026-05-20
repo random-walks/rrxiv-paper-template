@@ -4,6 +4,8 @@ GitHub template repository for a single rrxiv paper. **One repo per rrxiv public
 
 Use this template by clicking "Use this template → Create a new repository" on GitHub, or by cloning and reinitialising git history.
 
+For the conventions every paper repo follows (the three required build artifacts, the dependency-edge format, CI release setup, versioning), see [`PUBLISHING.md`](https://github.com/random-walks/rrxiv/blob/main/PUBLISHING.md) in the protocol repo. This README covers the template itself; PUBLISHING.md covers what every paper repo should produce.
+
 ## Repo layout
 
 ```
