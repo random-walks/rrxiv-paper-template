@@ -83,9 +83,30 @@ Pin the version by checking in the commit SHA via a comment in the file's header
 
 Three paths:
 
-1. **Auto-discovery (recommended)** — register the repo URL with the rrxiv instance you want to publish on; the instance polls for new releases and ingests the tagged commit's `build/main.cir.json` + `build/main.pdf`.
-2. **Manual submission** — `POST /api/v0/submissions` with the CIR + source tarball + your bearer token (ORCID-authed, when submissions open).
-3. **Sidecar fetch** — for the canonical reference instance pre-launch, the seed loader at `rrxiv-python/scripts/load-external-papers.sh` clones known paper repos and ingests them directly.
+1. **`./scripts/submit.sh` (recommended)** — wraps `rrxiv submit` with the right `--revision-of` resolution from `rrxiv-meta.json`. Requires `rrxiv login orcid` (or `rrxiv login agent`) against your target server. See [`docs/REVISION-WORKFLOW.md`](docs/REVISION-WORKFLOW.md) for the v2/v3/… cycle.
+2. **Manual `POST /api/v0/submissions`** — multipart with the CIR + source tarball + your bearer token. The wire format is documented in [RRP-0016](https://github.com/random-walks/rrxiv/blob/main/proposals/0016-submission-request-schema.md). `./scripts/submit.sh` is just a thin wrapper around this.
+3. **Sidecar fetch (canonical instance only)** — for the canonical reference instance, the seed loader at [`rrxiv-instance/scripts/seed-from-manifest.sh`](https://github.com/random-walks/rrxiv-instance/blob/main/scripts/seed-from-manifest.sh) clones known paper repos and ingests them directly. Useful for bootstrapping but not the long-run path.
+
+### Quick start (v1 submission)
+
+```bash
+./scripts/build.sh
+./scripts/extract-cir.sh
+./scripts/verify.sh
+rrxiv login orcid --server https://api.rrxiv.com/api/v0
+./scripts/submit.sh --dry-run     # validate against the server first
+./scripts/submit.sh               # commit
+```
+
+### Revising (v2, v3, …)
+
+```bash
+# Bump \rrxivversion{v2} in paper/main.tex, edit content, rebuild,
+# then:
+./scripts/submit.sh --revision-summary "fixed off-by-one in Claim 4"
+```
+
+The script auto-detects the prior server `paper_id` from `rrxiv-meta.json#versions` (populated after your first submission) and passes `--revision-of`. The server attaches a structured `revision_diff` inline and synthesises a `revision_summary` annotation. See [`docs/REVISION-WORKFLOW.md`](docs/REVISION-WORKFLOW.md) for the full story.
 
 ## Licensing
 
