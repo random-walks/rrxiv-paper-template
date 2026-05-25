@@ -57,9 +57,15 @@ jobs:
         run: ./scripts/build.sh
 
       - name: Extract CIR
+        env:
+          RRXIV_REPO: ${{ github.workspace }}/deps/rrxiv
+          RRXIV_PYTHON_REPO: ${{ github.workspace }}/deps/rrxiv-python
         run: ./scripts/extract-cir.sh
 
       - name: Verify CIR against schema
+        env:
+          RRXIV_REPO: ${{ github.workspace }}/deps/rrxiv
+          RRXIV_PYTHON_REPO: ${{ github.workspace }}/deps/rrxiv-python
         run: ./scripts/verify.sh
 
       - name: Upload workflow artifacts
