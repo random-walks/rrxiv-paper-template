@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
       # Bring in rrxiv (schema + CLI source) as a sibling of the
       # paper checkout so the extract + verify scripts can resolve
