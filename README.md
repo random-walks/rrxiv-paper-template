@@ -85,9 +85,19 @@ Three paths:
 
 1. **`./scripts/submit.sh` (recommended)** — wraps `rrxiv submit` with the right `--revision-of` resolution from `rrxiv-meta.json`. Requires `rrxiv login orcid` (or `rrxiv login agent`) against your target server. See [`docs/REVISION-WORKFLOW.md`](docs/REVISION-WORKFLOW.md) for the v2/v3/… cycle.
 2. **Manual `POST /api/v0/submissions`** — multipart with the CIR + source tarball + your bearer token. The wire format is documented in [RRP-0016](https://github.com/random-walks/rrxiv/blob/main/proposals/0016-submission-request-schema.md). `./scripts/submit.sh` is just a thin wrapper around this.
-3. **Sidecar fetch (canonical instance only)** — for the canonical reference instance, the seed loader at [`rrxiv-instance/scripts/seed-from-manifest.sh`](https://github.com/random-walks/rrxiv-instance/blob/main/scripts/seed-from-manifest.sh) clones known paper repos and ingests them directly. Useful for bootstrapping but not the long-run path.
+3. **Sidecar fetch (canonical instance only)** — for the canonical reference instance, a private deploy-overlay repo (`rrxiv-instance`, not public) runs a seed loader that clones known paper repos and ingests them directly. Useful for bootstrapping but not the long-run path. Third-party instances should rely on path 1 or 2.
 
 ### Quick start (v1 submission)
+
+Before your first submission, fill in the template placeholders so the legal + citation metadata reflects YOUR paper, not the template's:
+
+- `LICENSE-CODE` — replace `<YEAR>` with the current year and `<YOUR NAME OR ORG>` with your name (this license covers your `scripts/`).
+- `LICENSE-CONTENT` — same `<YEAR>` / `<YOUR NAME OR ORG>` placeholders; this license covers `paper/`.
+- `CITATION.cff` — fill the `url` and `given-names` / `family-names` fields.
+- `paper/main.tex` — change `\rrxivid{rrxiv-paper-template}` to your paper's slug once minted (or leave for the server to mint on first submit).
+- `rrxiv-meta.json` — update `title`, `topics`, authors.
+
+Then:
 
 ```bash
 ./scripts/build.sh

@@ -3,15 +3,15 @@ message: "If you reference this paper, please cite it as below."
 type: article
 title: "A starter rrxiv paper"
 authors:
-  - family-names: "Your Name"
-    given-names: ""
+  - family-names: "Author"
+    given-names: "Your"
 date-released: 2026-01-01
 license: CC-BY-4.0
-url: "https://github.com/<your-org>/<your-paper>"
+url: "https://github.com/your-org/your-paper"
 preferred-citation:
   type: article
   title: "A starter rrxiv paper"
   year: 2026
   authors:
-    - family-names: "Your Name"
-      given-names: ""
+    - family-names: "Author"
+      given-names: "Your"
