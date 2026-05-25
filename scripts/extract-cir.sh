@@ -47,12 +47,14 @@ if [[ -z "$RRXIV_CMD" ]]; then
   exit 127
 fi
 
-# `rrxiv parse` reads the .tex + the sidecar .rrxiv.aux + the standalone
-# meta and emits a CIR JSON document.
-$RRXIV_CMD parse \
-  --tex "$TEX" \
+# `rrxiv parse` reads the .tex + the sidecar .rrxiv.aux and emits a
+# CIR JSON document. The standalone rrxiv-meta.json is human-facing
+# metadata (slug, license, topics) — the v0.x parser pulls all of it
+# out of the .tex via the rrxiv.cls macros + the sidecar, so $META is
+# not currently passed to the CLI. Keep $META resolved above so future
+# tooling can wire it back in.
+$RRXIV_CMD parse "$TEX" \
   --sidecar "$AUX" \
-  --meta "$META" \
-  --out "$OUT"
+  --output "$OUT"
 
 echo "OK  $OUT"
