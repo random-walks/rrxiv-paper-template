@@ -22,14 +22,14 @@ jobs:
       # under $GITHUB_WORKSPACE/.. which is a sibling of the paper
       # checkout — supported by actions/checkout v4+.
       - name: Check out rrxiv (schema + CLI)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           repository: random-walks/rrxiv
           path: ../rrxiv
           ref: main
 
       - name: Check out rrxiv-python (CLI)
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           repository: random-walks/rrxiv-python
           path: ../rrxiv-python
