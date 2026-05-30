@@ -18,7 +18,8 @@ your-paper/
 ├── scripts/
 │   ├── build.sh              # tectonic main.tex → build/main.pdf
 │   ├── extract-cir.sh        # rrxiv parse → build/main.cir.json
-│   └── verify.sh             # ajv / python-jsonschema validate
+│   ├── verify.sh             # ajv / python-jsonschema validate
+│   └── submit.sh             # rrxiv submit (resolves --revision-of from meta)
 ├── build/                    # outputs (gitignored)
 │   ├── main.pdf
 │   ├── main.rrxiv.aux
@@ -91,8 +92,8 @@ Three paths:
 
 Before your first submission, fill in the template placeholders so the legal + citation metadata reflects YOUR paper, not the template's:
 
-- `LICENSE-CODE` — replace `<YEAR>` with the current year and `<YOUR NAME OR ORG>` with your name (this license covers your `scripts/`).
-- `LICENSE-CONTENT` — same `<YEAR>` / `<YOUR NAME OR ORG>` placeholders; this license covers `paper/`.
+- `LICENSE-CODE` — update the copyright line (`Copyright (c) 2023-2026 Ubik, Inc.`) to your own year and name/org; this license covers your `scripts/`.
+- `LICENSE-CONTENT` — same: replace the copyright holder on the `Copyright (c) …` line with your own; this license covers `paper/`.
 - `CITATION.cff` — fill the `url` and `given-names` / `family-names` fields.
 - `paper/main.tex` — change `\rrxivid{rrxiv-paper-template}` to your paper's slug once minted (or leave for the server to mint on first submit).
 - `rrxiv-meta.json` — update `title`, `topics`, authors.
