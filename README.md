@@ -101,6 +101,8 @@ Before your first submission, fill in the template placeholders so the legal + c
 Then:
 
 ```bash
+# Install the rrxiv CLI (not on PyPI yet — once published: pip install rrxiv):
+pip install "rrxiv @ git+https://github.com/random-walks/rrxiv-python.git"
 ./scripts/build.sh
 ./scripts/extract-cir.sh
 ./scripts/verify.sh

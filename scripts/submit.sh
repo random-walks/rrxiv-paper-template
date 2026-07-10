@@ -82,7 +82,9 @@ elif command -v uv >/dev/null 2>&1; then
   done
 fi
 if [[ -z "$RRXIV_CMD" ]]; then
-  echo "ERROR: rrxiv CLI not found. Install via 'pip install rrxiv' or 'uv tool install rrxiv'," >&2
+  echo "ERROR: rrxiv CLI not found. Install via:" >&2
+  echo "  pip install \"rrxiv @ git+https://github.com/random-walks/rrxiv-python.git\"" >&2
+  echo "  (not on PyPI yet — once published: pip install rrxiv)" >&2
   echo "or clone github.com/random-walks/rrxiv-python alongside this repo." >&2
   exit 127
 fi

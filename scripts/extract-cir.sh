@@ -2,9 +2,12 @@
 # Extract the Canonical Intermediate Representation (CIR) from the
 # build artifacts produced by scripts/build.sh.
 #
-# Uses the rrxiv CLI from random-walks/rrxiv-python (`pip install rrxiv`
-# or `uv tool install rrxiv` once published; for now: clone alongside
-# this repo and `uv run rrxiv parse` from there).
+# Uses the rrxiv CLI from random-walks/rrxiv-python. Install it with:
+#   pip install "rrxiv @ git+https://github.com/random-walks/rrxiv-python.git"
+# (mind the quotes — without them the shell splits the argument). Not on
+# PyPI yet — once published this becomes `pip install rrxiv`. Or clone
+# rrxiv-python alongside this repo and let the sibling fallback below
+# run `uv run rrxiv parse` from there.
 #
 # Output: build/main.cir.json
 set -euo pipefail
@@ -53,7 +56,8 @@ fi
 if [[ -z "$RRXIV_CMD" ]]; then
   echo "ERROR: rrxiv CLI not found." >&2
   echo "Options:" >&2
-  echo "  1. Install: pip install rrxiv  (once published)" >&2
+  echo "  1. Install: pip install \"rrxiv @ git+https://github.com/random-walks/rrxiv-python.git\"" >&2
+  echo "     (not on PyPI yet — once published: pip install rrxiv)" >&2
   echo "  2. Clone https://github.com/random-walks/rrxiv-python alongside this repo." >&2
   exit 127
 fi
