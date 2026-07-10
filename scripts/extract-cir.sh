@@ -3,11 +3,9 @@
 # build artifacts produced by scripts/build.sh.
 #
 # Uses the rrxiv CLI from random-walks/rrxiv-python. Install it with:
-#   pip install "rrxiv @ git+https://github.com/random-walks/rrxiv-python.git"
-# (mind the quotes — without them the shell splits the argument). Not on
-# PyPI yet — once published this becomes `pip install rrxiv`. Or clone
-# rrxiv-python alongside this repo and let the sibling fallback below
-# run `uv run rrxiv parse` from there.
+#   pip install rrxiv
+# Or clone rrxiv-python alongside this repo and let the sibling fallback
+# below run `uv run rrxiv parse` from there.
 #
 # Output: build/main.cir.json
 set -euo pipefail
@@ -27,7 +25,7 @@ fi
 # Resolve the rrxiv CLI. Order:
 #   1. $RRXIV_PYTHON_REPO env var (CI sets this; respects any in-repo
 #      override).
-#   2. `rrxiv` on PATH (once published to PyPI, or a global uv install).
+#   2. `rrxiv` on PATH (a `pip install rrxiv` or global uv install).
 #   3. Sibling checkout — the local-dev convention where paper repos sit
 #      next to rrxiv-python under one workspace dir.
 # `rrxiv.cli.app` eagerly imports every sub-command at module load
@@ -56,8 +54,7 @@ fi
 if [[ -z "$RRXIV_CMD" ]]; then
   echo "ERROR: rrxiv CLI not found." >&2
   echo "Options:" >&2
-  echo "  1. Install: pip install \"rrxiv @ git+https://github.com/random-walks/rrxiv-python.git\"" >&2
-  echo "     (not on PyPI yet — once published: pip install rrxiv)" >&2
+  echo "  1. Install: pip install rrxiv" >&2
   echo "  2. Clone https://github.com/random-walks/rrxiv-python alongside this repo." >&2
   exit 127
 fi
