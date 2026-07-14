@@ -102,7 +102,7 @@ Then:
 
 ```bash
 # Install the rrxiv CLI:
-pip install rrxiv
+pip install 'rrxiv>=0.2.1'
 ./scripts/build.sh
 ./scripts/extract-cir.sh
 ./scripts/verify.sh

@@ -2,8 +2,8 @@
 # Extract the Canonical Intermediate Representation (CIR) from the
 # build artifacts produced by scripts/build.sh.
 #
-# Uses the rrxiv CLI from random-walks/rrxiv-python. Install it with:
-#   pip install rrxiv
+# Uses the rrxiv CLI from random-walks/rrxiv-python, published on PyPI:
+#   pip install 'rrxiv>=0.2.1'   (or: uv tool install 'rrxiv>=0.2.1')
 # Or clone rrxiv-python alongside this repo and let the sibling fallback
 # below run `uv run rrxiv parse` from there.
 #
@@ -25,7 +25,7 @@ fi
 # Resolve the rrxiv CLI. Order:
 #   1. $RRXIV_PYTHON_REPO env var (CI sets this; respects any in-repo
 #      override).
-#   2. `rrxiv` on PATH (a `pip install rrxiv` or global uv install).
+#   2. `rrxiv` on PATH (a PyPI install: pip or uv tool, >=0.2.1).
 #   3. Sibling checkout — the local-dev convention where paper repos sit
 #      next to rrxiv-python under one workspace dir.
 # `rrxiv.cli.app` eagerly imports every sub-command at module load
@@ -54,7 +54,7 @@ fi
 if [[ -z "$RRXIV_CMD" ]]; then
   echo "ERROR: rrxiv CLI not found." >&2
   echo "Options:" >&2
-  echo "  1. Install: pip install rrxiv" >&2
+  echo "  1. Install from PyPI: pip install 'rrxiv>=0.2.1'" >&2
   echo "  2. Clone https://github.com/random-walks/rrxiv-python alongside this repo." >&2
   exit 127
 fi
